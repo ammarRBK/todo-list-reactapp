@@ -12,7 +12,7 @@ var bcrypt= require('bcrypt');
 // app.use(session({ secret: "todolist" }));
 
 router.get('/',(req,res)=>{
-        res.redirect('index');
+        res.send('welcome from users');
 });
 //sign up
 router.post('/signup',(req,res)=>{
