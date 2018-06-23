@@ -1,9 +1,7 @@
-# client and back-end enviroment
-
 /**
 * require dependencies
 */
-var app= require('../server);
+var app= require('../server');
 var debug = require('debug')('mean-app:server');
 var http = require('http');
 
@@ -11,7 +9,7 @@ var http = require('http');
 /**
 * get port frome enviroment or set default port
 */
-var port= proccess.env.PORT || 3000;
+var port= process.env.PORT || 3000;
 
 app.set('port', port);
 
@@ -58,7 +56,7 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
+  var addr = "http://localhost:3000/"
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
