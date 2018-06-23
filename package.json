@@ -1,0 +1,38 @@
+{
+  "name": "todolist",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongoose": "^5.1.6",
+    "morgan": "^1.9.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "serve-favicon": "^2.5.0"
+  },
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "bootstrap": "^4.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ammarRBK/cg-imagine-invent-toDoList-task.git"
+  },
+  "author": "Ammar Al-Ahmad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ammarRBK/cg-imagine-invent-toDoList-task/issues"
+  },
+  "homepage": "https://github.com/ammarRBK/cg-imagine-invent-toDoList-task#readme",
+  "description": "Create you account, sign in and create, save, edit, delete and mark as completed you daily tasks using our app"
+}
