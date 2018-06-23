@@ -9,8 +9,7 @@ var app= express();
 // app.use(cookieParser());
 // app.use(session({ secret: "todolist" }));
 
-router.get('/',(req,res)=>{
-    console.log('---------------->','cookis====',req.cookies,'\n','sessions---',req.session);
+router.get('/',(req,res)=> {
     res.send('Welcom to tasks');
 });
 
