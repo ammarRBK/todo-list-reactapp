@@ -7,11 +7,8 @@ import App from './App';
 import AddTask from './components/AddTask';
 import Login from './components/Login';
 import Tasks from './components/Tasks';
-
-//register the worker
 import registerServiceWorker from './registerServiceWorker';
 
-//add Router as "Father Component" to route btween the mean components
 ReactDOM.render(
     <Router>
         <div>
