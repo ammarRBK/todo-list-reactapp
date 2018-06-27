@@ -2,4 +2,27 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  align-items: center;
+  background-image: url("http://www.hdwallpapery.com/static/images/backgrounds-wallpaper-vector-tinted-background-wallpapers-array-wallwuzz-hd-wallpaper-7417_7KXGXZO.jpg");
+}
+
+#nav{
+  background-color: black;
+  align-items: baseline;
+}
+
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: #f1f1f1;
+  height: 100%; /* Full height */
+  position: fixed; /* Make it stick, even on scroll */
+  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+#loginlink{
+  margin-left: 700px;
 }

@@ -5,12 +5,6 @@ var db= require('../database/db');
 var bcrypt= require('bcrypt');
 
 
-//session for user tracking
-// var session= require('express-session');
-// var cookieParser= require('cookie-parser');
-// app.use(cookieParser());
-// app.use(session({ secret: "todolist" }));
-
 router.get('/',(req,res)=>{
         res.send('welcome from users');
 });

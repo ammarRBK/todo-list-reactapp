@@ -3,17 +3,12 @@ var router= express.Router();
 var db= require('../database/db');
 var app= express();
 
-//session for user tracking
-// var session= require('express-session');
-// var cookieParser= require('cookie-parser');
-// app.use(cookieParser());
-// app.use(session({ secret: "todolist" }));
 
-router.get('/',(req,res)=> {
+router.get('/',(req,res, next)=> {
     res.send('Welcom to tasks');
 });
 
-router.post('/addTask',(req,res)=>{
+router.post('/addTask',(req,res,next)=>{
     if(req.body.task){
         db.update({
             user_name: "ammar1"
