@@ -14,13 +14,21 @@ class App extends Component {
       confermedPassword: ""
     };
     this.handleChange= this.handleChange.bind(this);
+    this.handleSubmit= this.handleSubmit.bind(this);
   }
 
   handleChange(event){
-    const target= event.target;
-    this.setState({username:target.value});
-    alert(this.state.username);
+    this.setState({[event.target.name]:event.target.value});
   }
+
+  handleSubmit(event){
+    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+    event.preventDefault();
+  };
 
   componentDidMount() {
     
@@ -34,15 +42,16 @@ class App extends Component {
           <h1>Sign Up</h1>
           <p>Please fill out all information</p>
           <hr/>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <label><b> User Name:</b></label><br/>
-            <input class="input" type='text' name="username" value={this.state.username} placeholder="please enter user name" onChange={this.handleChange} required/><br/><br/>
+            <input class="input" type='text' name="username" value={this.state.username} placeholder="Enter user name" onChange={this.handleChange} required/><br/><br/>
             <label > <b>Email:</b> </label><br/>
-            <input class="input" type='text' name='email' placeholder='enter your email'/><br/><br/>
+            <input class="input" type='text' name='email' value={this.state.email} placeholder='Enter your email' onChange={this.handleChange}/><br/><br/>
             <label ><b>Password:</b></label><br/>
-            <input class="input" type="password" placeholder="Enter Password" name="psw" required/><br/><br/>
+            <input class="input" type='password' name="password" value={this.state.password} placeholder="Enter Password" onChange={this.handleChange} required/><br/><br/>
             <label ><b>Repeat Password:</b></label><br/>
-            <input type="password" placeholder="Repeat Password" name="psw-repeat" required/>
+            <input type='password' name="confermedPassword" value={this.state.confermedPassword} placeholder="Repeat Password" onChange={this.handleChange} required/><br/>
+            <input type='submit' value="Submit Sign Up"/>
           </form>
           <h1>{this.state.username}</h1>
         </div>
