@@ -5,6 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var tasks = require('./routes/tasks');
+var users= require('./routes/users');
 var app = express();
 
 var mongoose = require('mongoose');
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/tasks', tasks);
+app.use('/api/users', users);
 
 app.get('/api/book/undefined',(req,res)=>{
   console.log("invalid route");

@@ -37,7 +37,7 @@ router.post('/signup',(req,res)=>{
         res.send("User saved with hashed password");
     })
     .catch(error =>{
-        res.send("cannot save user because error in hashing ",error);
+        res.send("cannot save user because error in hashing ");
     })
 
     
@@ -53,10 +53,10 @@ router.post('/signin',(req,res)=>{
     }, function(err, user) {
         if (err) {
             console.log(err)
-            return res.status(404).send('error in sign in');
+            return res.send('error in sign in');
         }
         if (!user) {
-            return res.status(404).send('unable to find user');
+            return res.send('unable to find user');
         }
         else {
             bcrypt.compare(password,user.password)

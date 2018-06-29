@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import  ServerAPI from './apis/ServerAPI';
 
 class App extends Component {
 
@@ -22,12 +23,18 @@ class App extends Component {
   }
 
   handleSubmit(event){
-    axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
     event.preventDefault();
+    let user={
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    };
+
+    user.username && user.password ? axios.post(ServerAPI.url + `users/signup`, { user })
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    }) : alert("you've missed required inputs");
   };
 
   componentDidMount() {
