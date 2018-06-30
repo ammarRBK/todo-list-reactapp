@@ -66,7 +66,7 @@ router.post('/signin',(req,res)=>{
                 res.cookie('newUser',{user_name: username});
                 
                 
-                res.redirect('/tasks');
+                res.send('user authintecated');
             })
             .catch(err =>{
                 console.log("error in Comparing Password ", err);
