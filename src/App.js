@@ -32,7 +32,9 @@ class App extends Component {
 
     user.username && user.password ? axios.post(ServerAPI.url + `users/signup`,  user )
     .then(res => {
-      console.log(res);
+      console.log(res.data);
+      res.data === "User saved with hashed password" ? this.props.history.push('/Login') :
+      console.error("cannot route");
     })
     .catch(function (error) {
       console.log(error);
