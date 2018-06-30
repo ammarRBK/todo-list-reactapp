@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import ServerAPI from '../apis/ServerAPI';
 
 class Login extends Component {
 
@@ -11,6 +12,8 @@ class Login extends Component {
       username: "",
       password: ""
     }
+
+    this.props.inOrOut= true;
     this.handleChange= this.handleChange.bind(this);
     this.handleSubmit= this.handleSubmit.bind(this);
   }
@@ -19,13 +22,23 @@ class Login extends Component {
     this.setState({[event.target.name]: event.target.value});
   }
 
+  afterAuthUser(){
+    this.props.inOrOut= false;
+    this.props.history.push('/Tasks');
+  };
+
   handleSubmit(event){
     event.preventDefault();
-    this.state.username && this.state.password ? 
-    axios.post('users/signin', user)
+    const user={
+      username: this.state.username,
+      password: this.state.password
+    };
+    user.username && user.password? 
+    axios.post(ServerAPI.url + 'users/signin', user)
       .then( response =>{
         console.log(response.data);
-        response.data === "user authintecated" ? this.props.history.push('/Tasks') : 
+        response.data === "user authintecated" ? 
+         this.afterAuthUser() : 
         console.error("cannot login");
         
       })
@@ -38,17 +51,20 @@ class Login extends Component {
   render() {
     return (
       <div class="container">
-       <form>
+       <form onSubmit={this.handleSubmit}>
          <div className="form-group">
           <label> Username: </label>
           <input type="text" className="form-control" name="username" 
-          value={this.state.username} placeholder="enter your username" required/>
+          value={this.state.username} placeholder="Enter your username"
+          onChange={this.handleChange} required/>
          </div>
          <div className="form-group">
           <label> Password: </label>
           <input type="password" className="form-control" name="password" 
-          value={this.state.username} placeholder="enter your password" required/>
+          value={this.state.password} placeholder="Enter your password" 
+          onChange={this.handleChange} required/>
          </div>
+         <button type="submit" className="btn btn-default">Submit Login</button>
        </form>
       </div>
     );

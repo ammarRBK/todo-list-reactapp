@@ -56,17 +56,10 @@ router.post('/signin',(req,res)=>{
         else {
             bcrypt.compare(password,user.password)
             .then(samePassword =>{
-                if(!samePassword){
-                    res.status(403).send("wrong password");
+                if(samePassword){
+                    res.send("user authintecated");
                 }
-                // req.session.user={
-                //     username: user.user_name,
-                //     email: user.email
-                // }
-                res.cookie('newUser',{user_name: username});
-                
-                
-                res.send('user authintecated');
+                res.send("wrong password");
             })
             .catch(err =>{
                 console.log("error in Comparing Password ", err);
