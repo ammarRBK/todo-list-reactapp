@@ -57,7 +57,12 @@ router.post('/signin',(req,res)=>{
             bcrypt.compare(password,user.password)
             .then(samePassword =>{
                 if(samePassword){
-                    res.send("user authintecated");
+                    var UserToClient= {
+                        message: "user authintecated",
+                        username: user.username,
+                        email: user.email
+                    };
+                    res.send(UserToClient);
                 }
                 res.send("wrong password");
             })

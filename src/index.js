@@ -22,7 +22,7 @@ ReactDOM.render(
               {
                 (
                     window.location.href !== "http://localhost:3000/Tasks" ?
-                    <Link id="loginlink" to='/Login'><a class="navbar-brand">Login</a></Link> :
+                    <Link id="loginlink" to='/Login'><a class="navbar-brand">LogIn.</a></Link> :
                     <Link id="loginlink" 
                      onClick={
                       axios.get(ServerAPI.url + 'users/logout')
