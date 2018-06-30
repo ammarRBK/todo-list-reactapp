@@ -30,10 +30,12 @@ class App extends Component {
       password: this.state.password
     };
 
-    user.username && user.password ? axios.post(ServerAPI.url + `users/signup`, { user })
+    user.username && user.password ? axios.post(ServerAPI.url + `users/signup`,  user )
     .then(res => {
       console.log(res);
-      console.log(res.data);
+    })
+    .catch(function (error) {
+      console.log(error);
     }) : alert("you've missed required inputs");
   };
 

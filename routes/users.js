@@ -21,15 +21,12 @@ router.post('/signup',(req,res)=>{
             user_name: username,
             password: hashedPassword,
             email: email
-        };
+        }
         console.log(newUser);
         var user = new db(newUser);
         user.save()
         .then(item => {
-            res.redirect("/users")
-        })
-        .catch(err => {
-            console.log('unable to save user')
+            res.send("user saved in database");
         })
     })
     .then(()=>{
@@ -37,10 +34,8 @@ router.post('/signup',(req,res)=>{
         res.send("User saved with hashed password");
     })
     .catch(error =>{
-        res.send("cannot save user because error in hashing ");
+        res.send(error);
     })
-
-    
 });
 
 //signIn users
