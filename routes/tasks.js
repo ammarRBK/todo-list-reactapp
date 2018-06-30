@@ -3,18 +3,30 @@ var router= express.Router();
 var db= require('../database/db');
 var app= express();
 
+var dateTime = require('node-datetime');
+var dt = dateTime.create();
+var formatted = dt.format('Y-m-d H:M');
+
+var session= require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 router.get('/',(req,res, next)=> {
     res.send('Welcom to tasks');
 });
 
 router.post('/addTask',(req,res,next)=>{
+    console.log(req.session);
     if(req.body.task){
         db.update({
-            user_name: "ammar1"
+            _id: req.session._id
         }, {
             $push: {
-                tasks: req.body.task
+                tasks: {task: req.body.task, date: formatted}
             }
         }, function(err, updateUser) {
             if (err) {

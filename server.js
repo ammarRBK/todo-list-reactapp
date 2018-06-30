@@ -10,6 +10,14 @@ var app = express();
 
 var mongoose = require('mongoose');
 
+var session= require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

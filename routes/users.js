@@ -4,6 +4,14 @@ var router= express.Router();
 var db= require('../database/db');
 var bcrypt= require('bcrypt');
 
+var session= require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
+
 
 router.get('/',(req,res)=>{
         res.send('welcome from users');
@@ -60,9 +68,15 @@ router.post('/signin',(req,res)=>{
                     var UserToClient= {
                         message: "user authintecated",
                         username: user.username,
-                        email: user.email
+                        email: user.email,
+                        tasks: user.tasks,
+                        _id: user._id
                     };
+
+                    req.session.user= UserToClient;
+
                     res.send(UserToClient);
+                    console.log(req.session.user);
                 }
                 res.send("wrong password");
             })
