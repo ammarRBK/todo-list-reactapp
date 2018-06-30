@@ -1,36 +1,42 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import ServerAPI from '../apis/ServerAPI';
 
 class Tasks extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      book: {}
+      tasks:[]
     };
   }
 
   componentDidMount() {
-    axios.get('/api/book/'+this.props.match.params.id)
+    console.log(this.props.userFromServer);
+    axios.get(ServerAPI.url + `tasks/getTasks`,{_id: this.props.userFromServer._id})
       .then(res => {
-        this.setState({ book: res.data });
-        console.log(this.state.book);
-      });
-  }
-
-  delete(id){
-    console.log(id);
-    axios.delete('/api/book/'+id)
-      .then((result) => {
-        this.props.history.push("/")
+        this.setState({ tasks: res.data });
+        console.log(this.state.tasks);
       });
   }
 
   render() {
+    const getTasksAll= this.state.tasks.map((task) =>
+          <tr>
+            <th>{task.task}</th>
+            <th>{task.date}</th>
+          </tr> 
+    )
     return (
       <div class="container">
-        <h1>Welcom from Tasks</h1>
+        <table>
+          <tr>
+            <th>Task</th>
+            <th>Adding Date</th>
+          </tr>
+          {getTasksAll}
+        </table>
       </div>
     );
   }

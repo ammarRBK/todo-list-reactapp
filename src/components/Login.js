@@ -4,16 +4,44 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import ServerAPI from '../apis/ServerAPI';
 
+import Tasks from '../components/Tasks';
+
 class Login extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      userFromServer: {},
+      isLoggedIn: false
     }
     this.handleChange= this.handleChange.bind(this);
     this.handleSubmit= this.handleSubmit.bind(this);
+  }
+
+  showComponent(){
+    if(this.state.isLoggedIn === false)
+    {
+      return <div class="container">
+      <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+        <label> Username: </label>
+        <input type="text" className="form-control" name="username" 
+        value={this.state.username} placeholder="Enter your username"
+        onChange={this.handleChange} required/>
+        </div>
+        <div className="form-group">
+        <label> Password: </label>
+        <input type="password" className="form-control" name="password" 
+        value={this.state.password} placeholder="Enter your password" 
+        onChange={this.handleChange} required/>
+        </div>
+        <button type="submit" className="btn btn-default">Submit Login</button>
+      </form>
+    </div>
+   }
+     return <Tasks userFromServer={this.state.userFromServer}/>
   }
 
   handleChange(event){
@@ -21,8 +49,8 @@ class Login extends Component {
   }
 
   afterAuthUser(){
-    this.props.inOrOut= false;
-    this.props.history.push('/Tasks');
+    this.state.isLoggedIn= true;
+    // this.props.history.push('/Tasks');
   };
 
   handleSubmit(event){
@@ -35,6 +63,7 @@ class Login extends Component {
     axios.post(ServerAPI.url + 'users/signin', user)
       .then( response =>{
         console.log(response.data);
+        this.setState({userFromServer: response.data});
         response.data.message === "user authintecated" ? 
          this.afterAuthUser() : 
         console.error("cannot login");
@@ -45,26 +74,9 @@ class Login extends Component {
       })
       : alert("please fillout your information");
   }
-
   render() {
     return (
-      <div class="container">
-       <form onSubmit={this.handleSubmit}>
-         <div className="form-group">
-          <label> Username: </label>
-          <input type="text" className="form-control" name="username" 
-          value={this.state.username} placeholder="Enter your username"
-          onChange={this.handleChange} required/>
-         </div>
-         <div className="form-group">
-          <label> Password: </label>
-          <input type="password" className="form-control" name="password" 
-          value={this.state.password} placeholder="Enter your password" 
-          onChange={this.handleChange} required/>
-         </div>
-         <button type="submit" className="btn btn-default">Submit Login</button>
-       </form>
-      </div>
+      this.showComponent()
     );
   }
 }

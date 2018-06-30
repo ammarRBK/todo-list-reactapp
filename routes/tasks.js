@@ -7,23 +7,29 @@ var dateTime = require('node-datetime');
 var dt = dateTime.create();
 var formatted = dt.format('Y-m-d H:M');
 
-var session= require('express-session');
-app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}));
+// var session= require('express-session');
+// app.use(session({
+//   secret: 'keyboard cat',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: true }
+// }));
 
 router.get('/',(req,res, next)=> {
     res.send('Welcom to tasks');
 });
 
+router.get('/getTasks',(req,res,next)=>{
+    db.find({_id:req.body._id},(err,user)=>{
+        err ? res.send("unable to find user") : res.send(user.tasks);
+    })
+})
+
 router.post('/addTask',(req,res,next)=>{
     console.log(req.session);
     if(req.body.task){
         db.update({
-            _id: req.session._id
+            _id: req.body._id
         }, {
             $push: {
                 tasks: {task: req.body.task, date: formatted}
