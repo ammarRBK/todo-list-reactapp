@@ -12,8 +12,6 @@ class Login extends Component {
       username: "",
       password: ""
     }
-
-    this.props.inOrOut= true;
     this.handleChange= this.handleChange.bind(this);
     this.handleSubmit= this.handleSubmit.bind(this);
   }

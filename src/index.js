@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import axios from 'axios';
+import  ServerAPI from './apis/ServerAPI';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 // import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css';
 import './index.css';
@@ -17,7 +19,20 @@ ReactDOM.render(
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="/">My Daily Tasks</a>
-              <Link id="loginlink" to='/Login'><a class="navbar-brand">Login</a></Link>
+              {
+                (
+                    window.location.href !== "http://localhost:3000/Tasks" ?
+                    <Link id="loginlink" to='/Login'><a class="navbar-brand">Login</a></Link> :
+                    <Link id="loginlink" 
+                     onClick={
+                      axios.get(ServerAPI.url + 'users/logout')
+                      .then(res =>{
+                        console.log(res);
+                      })
+                    } 
+                    to='/Login'><a class="navbar-brand">LogOut</a></Link>
+                )
+              }
             </div>
           </div>
         </nav>
