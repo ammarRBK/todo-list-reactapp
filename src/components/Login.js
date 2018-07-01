@@ -31,7 +31,7 @@ class Login extends Component {
         value={this.state.username} placeholder="Enter your username"
         onChange={this.handleChange} required/>
         </div>
-        <div className="form-group">
+        <div classammaName="form-group">
         <label> Password: </label>
         <input type="password" className="form-control" name="password" 
         value={this.state.password} placeholder="Enter your password" 
