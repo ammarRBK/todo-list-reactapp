@@ -4,17 +4,24 @@ var router= express.Router();
 var db= require('../database/db');
 var bcrypt= require('bcrypt');
 
-// var session= require('express-session');
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: true }
-// }));
+var session= require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 
-router.get('/',(req,res)=>{
-        res.send('welcome from users');
+router.get('/',(req,res, next)=> {
+    db.find({_id:req.session.user._id},(err,user)=>{
+        err ? res.send("unable to find user") : 
+         userFind={
+            message: "these are Tasks",
+            tasks: user.tasks
+        }
+        res.send(userFind);
+    })
 });
 //sign up
 router.post('/signup',(req,res)=>{

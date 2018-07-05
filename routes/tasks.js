@@ -16,13 +16,13 @@ var formatted = dt.format('Y-m-d H:M');
 // }));
 
 router.get('/',(req,res, next)=> {
-    res.send('Welcom to tasks');
+    db.find({_id:req.session.user._id},(err,user)=>{
+        err ? res.send("unable to find user") : res.send(user.tasks);
+    })
 });
 
 router.get('/getTasks',(req,res,next)=>{
-    db.find({_id:req.body._id},(err,user)=>{
-        err ? res.send("unable to find user") : res.send(user.tasks);
-    })
+    
 })
 
 router.post('/addTask',(req,res,next)=>{
