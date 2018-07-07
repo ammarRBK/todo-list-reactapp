@@ -12,17 +12,6 @@ app.use(session({
   cookie: { secure: true }
 }));
 
-
-router.get('/',(req,res, next)=> {
-    db.find({_id:req.session.user._id},(err,user)=>{
-        err ? res.send("unable to find user") : 
-         userFind={
-            message: "these are Tasks",
-            tasks: user.tasks
-        }
-        res.send(userFind);
-    })
-});
 //sign up
 router.post('/signup',(req,res)=>{
     var username= req.body.username;

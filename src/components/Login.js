@@ -62,7 +62,6 @@ class Login extends Component {
     user.username && user.password? 
     axios.post(ServerAPI.url + 'users/signin', user)
       .then( response =>{
-        console.log(response.data);
         this.setState({userFromServer: response.data});
         response.data.message === "user authintecated" ? 
          this.afterAuthUser() : 

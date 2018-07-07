@@ -13,30 +13,16 @@ class Tasks extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.userFromServer);
-    axios.get('http://localhost:3000/api/users')
+    axios.get( ServerAPI.url + 'tasks/getusertasks' )
       .then(res => {
-        console.log('==========>Tasks response ',res.data);
-        // this.props.userFromServer.tasks.forEach(element => {
-        //   this.state.tasks.push(element);
-        // });
+        console.log('==========>Tasks response ',{tasks:res.data.tasks});
         this.setState({ tasks: res.data.tasks });
       });   
   }
 
   render() {
-    console.log('----------->Tasks ',this.state.tasks);
     return (
       <div class="container">
-        {/* <ul>
-          <li>Hello world</li>
-          {this.state.tasks.map(task =>{ 
-            return (<li>
-              {task.task}
-              {task.date}
-            </li>)
-          })}
-        </ul> */}
         <table>
           <tr>
             <th>Task</th>

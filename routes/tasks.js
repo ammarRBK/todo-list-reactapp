@@ -15,15 +15,16 @@ var formatted = dt.format('Y-m-d H:M');
 //   cookie: { secure: true }
 // }));
 
-router.get('/',(req,res, next)=> {
-    db.find({_id:req.session.user._id},(err,user)=>{
-        err ? res.send("unable to find user") : res.send(user.tasks);
+router.get('/getusertasks',(req,res, next)=> {
+    db.find({_id:"5b371e213c6f6116e40aeb31"},(err,user)=>{
+        err ? res.send("unable to find user") : 
+         userFind={
+            message: "these are Tasks",
+            tasks: user[0].tasks
+        }
+        res.send(userFind);
     })
 });
-
-router.get('/getTasks',(req,res,next)=>{
-    
-})
 
 router.post('/addTask',(req,res,next)=>{
     console.log(req.session);
