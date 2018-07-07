@@ -17,7 +17,7 @@ app.use(session({
 
 const userQuery= require('./users').query;
 
-router.get('/getusertask',(req,res, next)=> {
+router.get('/getusertasks',(req,res, next)=> {
     console.log("=======================================> SESSION",userQuery)
     db.findOne({ _id: userQuery.user._id },(err,user)=>{
         err ? res.send("unable to find user") : 

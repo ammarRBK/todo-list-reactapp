@@ -14,18 +14,6 @@ app.use(session({
 
 const query= {};
 
-router.get('/getusertasks',(req,res, next)=> {
-    console.log("=======================================> SESSION", query.user)
-    db.findOne({ _id: query.user._id },(err,user)=>{
-        err ? res.send("unable to find user") : 
-         userFind={
-            message: "these are Tasks",
-            tasks: user.tasks
-        }
-        res.send(userFind);
-    })
-});
-
 //sign up
 router.post('/signup',(req,res)=>{
     var username= req.body.username;
