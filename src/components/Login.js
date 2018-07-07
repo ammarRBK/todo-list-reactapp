@@ -20,37 +20,12 @@ class Login extends Component {
     this.handleSubmit= this.handleSubmit.bind(this);
   }
 
-  showComponent(){
-    if(this.state.isLoggedIn === false)
-    {
-      return <div class="container">
-      <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-        <label> Username: </label>
-        <input type="text" className="form-control" name="username" 
-        value={this.state.username} placeholder="Enter your username"
-        onChange={this.handleChange} required/>
-        </div>
-        <div classammaName="form-group">
-        <label> Password: </label>
-        <input type="password" className="form-control" name="password" 
-        value={this.state.password} placeholder="Enter your password" 
-        onChange={this.handleChange} required/>
-        </div>
-        <button type="submit" className="btn btn-default">Submit Login</button>
-      </form>
-    </div>
-   }
-     return <Tasks userFromServer={this.state.userFromServer}/>
-  }
-
   handleChange(event){
     this.setState({[event.target.name]: event.target.value});
   }
 
   afterAuthUser(){
-    this.state.isLoggedIn= true;
-    // this.props.history.push('/Tasks');
+    this.props.history.push('/Tasks');
   };
 
   handleSubmit(event){
@@ -76,7 +51,23 @@ class Login extends Component {
   }
   render() {
     return (
-      this.showComponent()
+      <div class="container">
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+          <label> Username: </label>
+          <input type="text" className="form-control" name="username" 
+          value={this.state.username} placeholder="Enter your username"
+          onChange={this.handleChange} required/>
+          </div>
+          <div classammaName="form-group">
+          <label> Password: </label>
+          <input type="password" className="form-control" name="password" 
+          value={this.state.password} placeholder="Enter your password" 
+          onChange={this.handleChange} required/>
+          </div>
+          <button type="submit" className="btn btn-default">Submit Login</button>
+        </form>
+      </div>
     );
   }
 }

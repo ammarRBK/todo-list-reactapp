@@ -76,7 +76,7 @@ router.post('/deleteTask',(req,res)=>{
     const oldTask= req.body.oldTask;
     if(oldTask !== ""){
         db.update({
-            _id: "5b27edb89356d723550757b3"
+            _id: userQuery.user._id
         }, {
             $pull: {
                 tasks: oldTask
@@ -87,6 +87,7 @@ router.post('/deleteTask',(req,res)=>{
             } else {
     
                 console.log('pulled successfully', updateUser);
+                res.send({message:'deleted successfully', tasks: updateUser.tasks})
             }
         
         })

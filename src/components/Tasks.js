@@ -23,6 +23,8 @@ class Tasks extends Component {
   }
 
   deletTask(task){
+    console.log('=====> this task will be deleted', task);
+    axios.post(ServerAPI.url + 'tasks/deleteTask')
 
   }
 
