@@ -7,20 +7,23 @@ var dateTime = require('node-datetime');
 var dt = dateTime.create();
 var formatted = dt.format('Y-m-d H:M');
 
-// var session= require('express-session');
-// app.use(session({
-//   secret: 'keyboard cat',
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: { secure: true }
-// }));
+var session= require('express-session');
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
-router.get('/getusertasks',(req,res, next)=> {
-    db.find({_id:"5b371e213c6f6116e40aeb31"},(err,user)=>{
+const userQuery= require('./users').query;
+
+router.get('/getusertask',(req,res, next)=> {
+    console.log("=======================================> SESSION",userQuery)
+    db.findOne({ _id: userQuery.user._id },(err,user)=>{
         err ? res.send("unable to find user") : 
          userFind={
             message: "these are Tasks",
-            tasks: user[0].tasks
+            tasks: user.tasks
         }
         res.send(userFind);
     })

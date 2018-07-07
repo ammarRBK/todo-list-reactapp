@@ -12,6 +12,20 @@ app.use(session({
   cookie: { secure: true }
 }));
 
+const query= {};
+
+router.get('/getusertasks',(req,res, next)=> {
+    console.log("=======================================> SESSION", query.user)
+    db.findOne({ _id: query.user._id },(err,user)=>{
+        err ? res.send("unable to find user") : 
+         userFind={
+            message: "these are Tasks",
+            tasks: user.tasks
+        }
+        res.send(userFind);
+    })
+});
+
 //sign up
 router.post('/signup',(req,res)=>{
     var username= req.body.username;
@@ -68,10 +82,11 @@ router.post('/signin',(req,res)=>{
                         tasks: user.tasks,
                         _id: user._id
                     };
-
+                    query.user= UserToClient;
                     req.session.user= UserToClient;
+                    req.session.save();
 
-                    res.send(UserToClient);
+                    res.send(req.session.user);
                     console.log(req.session.user);
                 }
                 res.send("wrong password");
@@ -83,4 +98,6 @@ router.post('/signin',(req,res)=>{
     })
 });
 
-module.exports= router;
+
+
+module.exports= {router,query};

@@ -69,6 +69,7 @@ class Login extends Component {
         
       })
       .catch(err =>{
+        alert("Server Die");
         console.error(err);
       })
       : alert("please fillout your information");

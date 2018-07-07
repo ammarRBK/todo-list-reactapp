@@ -5,7 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var tasks = require('./routes/tasks');
-var users= require('./routes/users');
+var users= require('./routes/users').router;
 var app = express();
 
 var mongoose = require('mongoose');
