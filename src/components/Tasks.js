@@ -10,6 +10,8 @@ class Tasks extends Component {
     this.state = {
       tasks:[]
     };
+
+    this.deletTask= this.deletTask.bind(this);
   }
 
   componentDidMount() {
@@ -20,25 +22,39 @@ class Tasks extends Component {
       });   
   }
 
+  deletTask(task){
+
+  }
+
   render() {
     return (
       <div class="container">
-        <table>
-          <tr>
-            <th>Task</th>
-            <th>Adding Date</th>
-          </tr>
-          {this.state.tasks.map(elem =>{
-            return (<tr>
-                      <th>
-                        Hello world
-                        {elem.task}
-                      </th>
-                      <th>
-                        {elem.date}
-                      </th>
-                    </tr>)
-            })}
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Adding Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.tasks.map(elem =>{
+              return (<tr>
+                        <td>
+                          {elem.task}
+                        </td>
+                        <td>
+                          {elem.date}
+                        </td>
+                        <td>
+                          <button class="btn btn-danger" onClick={this.deletTask(elem.task)}> Delete </button>
+                        </td>
+                        <td>
+                          <input type="checkbox" />
+                          <p>Mark as Done</p>
+                        </td>
+                      </tr>)
+              })}
+          </tbody>
         </table>
       </div>
     );
