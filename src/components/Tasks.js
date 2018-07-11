@@ -24,8 +24,7 @@ class Tasks extends Component {
 
   deletTask(task){
     console.log('=====> this task will be deleted', task);
-    axios.post(ServerAPI.url + 'tasks/deleteTask')
-
+    // axios.post(ServerAPI.url + 'tasks/deleteTask',{})
   }
 
   render() {
@@ -48,13 +47,12 @@ class Tasks extends Component {
                           {elem.date}
                         </td>
                         <td>
-                          <button class="btn btn-danger" onClick={this.deletTask(elem.task)}> Delete </button>
-                        </td>
-                        <td>
                           <input type="checkbox" />
                           <p>Mark as Done</p>
                         </td>
-                      </tr>)
+                        <button class="btn btn-danger" onDoubleClick={this.deletTask(elem.task)}> Delete </button>
+                      </tr>
+                      )
               })}
           </tbody>
         </table>
