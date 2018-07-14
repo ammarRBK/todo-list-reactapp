@@ -52,6 +52,8 @@ class Login extends Component {
   render() {
     return (
       <div class="container">
+        <center><h1> Sign In</h1></center>
+        <hr/>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
           <label> Username: </label>
@@ -64,7 +66,7 @@ class Login extends Component {
           <input type="password" className="form-control" name="password" 
           value={this.state.password} placeholder="Enter your password" 
           onChange={this.handleChange} required/>
-          </div>
+          </div><br/>
           <button type="submit" className="btn btn-default">Submit Login</button>
         </form>
       </div>

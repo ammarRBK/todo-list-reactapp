@@ -55,14 +55,14 @@ class App extends Component {
           <hr/>
           <form onSubmit={this.handleSubmit}>
             <label><b> User Name:</b></label><br/>
-            <input class="input" type='text' name="username" value={this.state.username} placeholder="Enter user name" onChange={this.handleChange} required/><br/><br/>
+            <input className="form-control" type='text' name="username" value={this.state.username} placeholder="Enter user name" onChange={this.handleChange} required/><br/><br/>
             <label > <b>Email:</b> </label><br/>
-            <input class="input" type='text' name='email' value={this.state.email} placeholder='Enter your email' onChange={this.handleChange}/><br/><br/>
+            <input className="form-control" type='text' name='email' value={this.state.email} placeholder='Enter your email' onChange={this.handleChange}/><br/><br/>
             <label ><b>Password:</b></label><br/>
-            <input class="input" type='password' name="password" value={this.state.password} placeholder="Enter Password" onChange={this.handleChange} required/><br/><br/>
+            <input className="form-control" type='password' name="password" value={this.state.password} placeholder="Enter Password" onChange={this.handleChange} required/><br/><br/>
             <label ><b>Repeat Password:</b></label><br/>
-            <input type='password' name="confermedPassword" value={this.state.confermedPassword} placeholder="Repeat Password" onChange={this.handleChange} required/><br/>
-            <input type='submit' value="Submit Sign Up"/>
+            <input className="form-control" type='password'  name="confermedPassword" value={this.state.confermedPassword} placeholder="Repeat Password" onChange={this.handleChange} required/><br/>
+            <input type='submit' class="btn btn-success" value="Submit Sign Up"/>
           </form>
           <h1>{this.state.username}</h1>
         </div>

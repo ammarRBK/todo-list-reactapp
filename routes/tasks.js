@@ -33,16 +33,16 @@ router.post('/addTask',(req,res,next)=>{
     console.log(req.session);
     if(req.body.task){
         db.update({
-            _id: req.body._id
+            _id: userQuery.user._id
         }, {
             $push: {
-                tasks: {task: req.body.task, date: formatted}
+                tasks: {task: req.body.task, date: formatted, done: false}
             }
         }, function(err, updateUser) {
             if (err) {
                 console.log('error')
             } else {
-                res.send(updateUser)
+                res.send({ message: "task added" })
             }
         })
     }

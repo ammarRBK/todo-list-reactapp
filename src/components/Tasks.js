@@ -10,8 +10,16 @@ class Tasks extends Component {
     this.state = {
       tasks:[]
     };
+  }
 
-    this.deletTask= this.deletTask.bind(this);
+  handleClick(){
+    console.log("----dskdddddddkkkkkkkks-sssssssssss-dkfffffffffffd--------------fkkkkkk")
+    this.props.history.push('/AddTask');
+  }
+
+  deleteTask(task){
+    console.log('=====> this task will be deleted', task);
+    // axios.post(ServerAPI.url + 'tasks/deleteTask',{})
   }
 
   componentDidMount() {
@@ -20,11 +28,6 @@ class Tasks extends Component {
         console.log('==========>Tasks response ',{tasks:res.data.tasks});
         this.setState({ tasks: res.data.tasks });
       });   
-  }
-
-  deletTask(task){
-    console.log('=====> this task will be deleted', task);
-    // axios.post(ServerAPI.url + 'tasks/deleteTask',{})
   }
 
   render() {
@@ -50,15 +53,18 @@ class Tasks extends Component {
                           <input type="checkbox" />
                           <p>Mark as Done</p>
                         </td>
-                        <button class="btn btn-danger" onDoubleClick={this.deletTask(elem.task)}> Delete </button>
+                        <td>
+                          <button onSubmit={(e) => this.deleteTask(elem.task,e)}> Delete </button>
+                        </td>
                       </tr>
                       )
               })}
           </tbody>
         </table>
+        <button class="btn btn-success" onClick={(e) => this.handleClick(e)}> Add Tasks </button>
       </div>
     );
   }
 }
-
+{/* <button class="btn btn-danger" onDoubleClick={this.deletTask(elem.task)}> Delete </button> */}
 export default Tasks;
