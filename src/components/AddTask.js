@@ -8,16 +8,17 @@ class AddTask extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      task:"Hello world"
+      task:""
     };
+    this.handleChange= this.handleChange.bind(this);
+    this.handleSubmit= this.handleSubmit.bind(this);
   }
 
   handleChange(event){
-    var target= event.target;
-    this.setState({[target.name]:target.value});
+    this.setState({[event.target.name]: event.target.value});
   }
 
-  onSubmit(event){
+  handleSubmit(event){
     event.preventDefault();
     axios.post( ServerAPI.url+ 'tasks/addTask', { task: this.state.task } )
     .then( res => {

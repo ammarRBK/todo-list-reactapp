@@ -30,8 +30,7 @@ router.get('/getusertasks',(req,res, next)=> {
 });
 
 router.post('/addTask',(req,res,next)=>{
-    console.log(req.session);
-    if(req.body.task){
+    console.log("ADD TASK BODY--------->",JSON.stringify(req.body.task));
         db.update({
             _id: userQuery.user._id
         }, {
@@ -45,9 +44,6 @@ router.post('/addTask',(req,res,next)=>{
                 res.send({ message: "task added" })
             }
         })
-    }
-    console.log('Please submit a Task');
-
 });
 
 router.post('/editTask',(req,res)=>{
