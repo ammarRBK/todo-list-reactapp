@@ -19,6 +19,9 @@ class Tasks extends Component {
 
   deleteTask(task){
     console.log('=====> this task will be deleted', task);
+    const array= this.state.tasks
+    array.splice(array.indexOf(task),1);
+    this.setState({tasks: array});
     // axios.post(ServerAPI.url + 'tasks/deleteTask',{})
   }
 
@@ -54,7 +57,7 @@ class Tasks extends Component {
                           <p>Mark as Done</p>
                         </td>
                         <td>
-                          <button onSubmit={(e) => this.deleteTask(elem.task,e)}> Delete </button>
+                          <button onClick={(e) => this.deleteTask(elem.task)}> Delete </button>
                         </td>
                       </tr>
                       )
