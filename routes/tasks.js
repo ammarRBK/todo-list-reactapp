@@ -70,7 +70,6 @@ router.post('/editTask',(req,res)=>{
 
 router.post('/deleteTask',(req,res)=>{
     const oldTask= req.body.oldTask;
-    if(oldTask !== ""){
         db.update({
             _id: userQuery.user._id
         }, {
@@ -86,9 +85,7 @@ router.post('/deleteTask',(req,res)=>{
                 res.send({message:'deleted successfully', tasks: updateUser.tasks})
             }
         
-        })
-    }
-    res.send("please submit a task"); 
+        });
 });
 
 module.exports= router;

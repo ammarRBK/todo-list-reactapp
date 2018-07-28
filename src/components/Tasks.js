@@ -8,21 +8,26 @@ class Tasks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks:[]
+      tasks:[],
+      deleteMessage:""
     };
   }
 
-  handleClick(){
-    console.log("----dskdddddddkkkkkkkks-sssssssssss-dkfffffffffffd--------------fkkkkkk")
-    this.props.history.push('/AddTask');
+  showMessage(_task,index){
+    console.log('=====> this task will be deleted', _task.task, "with index ",index);
+    const array= this.state.tasks
+    array.splice(index,1);
+    this.setState({tasks: array});
+
+    this.state.deleteMessage= "the task"+ _task.task + "is deleted";
   }
 
-  deleteTask(task){
-    console.log('=====> this task will be deleted', task);
-    const array= this.state.tasks
-    array.splice(array.indexOf(task),1);
-    this.setState({tasks: array});
-    // axios.post(ServerAPI.url + 'tasks/deleteTask',{})
+  deleteTask(task,index){
+    axios.post(ServerAPI.url + 'tasks/deleteTask',{oldTask: task})
+    .then( _response => {
+      console.log("response data------------->",_response.data);
+      _response.data.message === 'deleted successfully' ? this.showMessage(task,index) : alert("Error in deleting task");
+    })
   }
 
   componentDidMount() {
@@ -44,7 +49,7 @@ class Tasks extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.tasks.map(elem =>{
+            {this.state.tasks.map((elem,index) =>{
               return (<tr>
                         <td>
                           {elem.task}
@@ -57,14 +62,15 @@ class Tasks extends Component {
                           <p>Mark as Done</p>
                         </td>
                         <td>
-                          <button onClick={(e) => this.deleteTask(elem.task)}> Delete </button>
+                          <button className="btn btn-danger" onClick={(_e) => this.deleteTask(elem,index)}> Delete </button>
                         </td>
                       </tr>
                       )
               })}
           </tbody>
         </table>
-        <button class="btn btn-success" onClick={(e) => this.handleClick(e)}> Add Tasks </button>
+        <h2>{this.state.deleteMessage}</h2>
+        <Link id="toAddTasks" to='/AddTask'><a data-toggle="tooltip" data-placement="bottom" title="go to add tasks page">Add Task</a></Link>
       </div>
     );
   }
