@@ -1,3 +1,12 @@
 table, tr, th{
     border: 1px solid black;
 }
+
+#done{
+    background-color: green;
+}
+
+#still{
+    color: white;
+    background-color: chartreuse;
+}

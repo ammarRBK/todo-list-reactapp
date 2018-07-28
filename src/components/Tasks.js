@@ -9,8 +9,9 @@ class Tasks extends Component {
     super(props);
     this.state = {
       tasks:[],
-      deleteMessage:""
+      isChecked:"still"
     };
+    this.taskChecked= this.taskChecked.bind(this);
   }
 
   showMessage(_task,index){
@@ -30,6 +31,11 @@ class Tasks extends Component {
     })
   }
 
+  taskChecked(){
+    console.log(this.state.isChecked);
+    this.state.isChecked === "still" ? this.setState({ isChecked: "done" }) : this.setState({ isChecked: "still" });
+  }
+
   componentDidMount() {
     axios.get( ServerAPI.url + 'tasks/getusertasks' )
       .then(res => {
@@ -41,11 +47,12 @@ class Tasks extends Component {
   render() {
     return (
       <div class="container">
-        <table className="table">
+        <table className="table table-striped">
           <thead>
             <tr>
               <th>Task</th>
               <th>Adding Date</th>
+              <th>Is Done</th>
             </tr>
           </thead>
           <tbody>
@@ -58,7 +65,10 @@ class Tasks extends Component {
                           {elem.date}
                         </td>
                         <td>
-                          <input type="checkbox" />
+                          {this.state.isChecked}
+                        </td>
+                        <td>
+                          <input type="checkbox" onChange={this.taskChecked}/>
                           <p>Mark as Done</p>
                         </td>
                         <td>
@@ -70,7 +80,7 @@ class Tasks extends Component {
           </tbody>
         </table>
         <h2>{this.state.deleteMessage}</h2>
-        <Link id="toAddTasks" to='/AddTask'><a data-toggle="tooltip" data-placement="bottom" title="go to add tasks page">Add Task</a></Link>
+        <Link id="toAddTasks" to='/AddTask'><a class="" data-toggle="tooltip" data-placement="bottom" title="go to add tasks page">Add Task</a></Link>
       </div>
     );
   }

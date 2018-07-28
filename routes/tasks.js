@@ -35,7 +35,7 @@ router.post('/addTask',(req,res,next)=>{
             _id: userQuery.user._id
         }, {
             $push: {
-                tasks: {task: req.body.task, date: formatted, done: false}
+                tasks: {task: req.body.task, date: formatted, done: "still"}
             }
         }, function(err, updateUser) {
             if (err) {
