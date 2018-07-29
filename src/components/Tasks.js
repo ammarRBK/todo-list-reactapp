@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import ServerAPI from '../apis/ServerAPI';
 
@@ -36,6 +37,10 @@ class Tasks extends Component {
     this.state.isChecked === "still" ? this.setState({ isChecked: "done" }) : this.setState({ isChecked: "still" });
   }
 
+  startEdit(){
+    $( `<button id="savebutton" onclick="this.taskChecked()">SAVE</button>` ).insertAfter( "#task" );
+  }
+
   componentDidMount() {
     axios.get( ServerAPI.url + 'tasks/getusertasks' )
       .then(res => {
@@ -55,11 +60,12 @@ class Tasks extends Component {
               <th>Is Done</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="taskField">
             {this.state.tasks.map((elem,index) =>{
               return (<tr>
                         <td>
-                          {elem.task}
+                          <h3 id="task" title="press on me to edit" defaultValue={elem.task} onClick={()=> this.startEdit()}>{elem.task}</h3>
+                          
                         </td>
                         <td>
                           {elem.date}
@@ -85,5 +91,4 @@ class Tasks extends Component {
     );
   }
 }
-{/* <button class="btn btn-danger" onDoubleClick={this.deletTask(elem.task)}> Delete </button> */}
 export default Tasks;
