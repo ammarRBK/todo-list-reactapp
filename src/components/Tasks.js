@@ -10,7 +10,8 @@ class Tasks extends Component {
     super(props);
     this.state = {
       tasks:[],
-      isChecked:"still"
+      isChecked:"still",
+      index: null
     };
     this.taskChecked= this.taskChecked.bind(this);
   }
@@ -37,11 +38,21 @@ class Tasks extends Component {
     this.state.isChecked === "still" ? this.setState({ isChecked: "done" }) : this.setState({ isChecked: "still" });
   }
 
-  startEdit(){
-    $( `<button id="savebutton" onclick="this.taskChecked()">SAVE</button>` ).insertAfter( "#task" );
+  startEdit(task,_index){
+    console.log(task);
+    this.setState({ index: _index });
+    $("#editButton").show();
+  }
+
+  saveEdition(){
+    var oldTaskIndex= this.state.index;
+    const newTask= $("#"+oldTaskIndex).text();
+    console.log("THE NEW TASK IS","\n",newTask);
+    
   }
 
   componentDidMount() {
+    $("#editButton").hide();
     axios.get( ServerAPI.url + 'tasks/getusertasks' )
       .then(res => {
         console.log('==========>Tasks response ',{tasks:res.data.tasks});
@@ -58,14 +69,14 @@ class Tasks extends Component {
               <th>Task</th>
               <th>Adding Date</th>
               <th>Is Done</th>
+              <button id="editButton" class="btn btn-success" onClick={()=> this.saveEdition()}>Save Edite</button>
             </tr>
           </thead>
           <tbody id="taskField">
             {this.state.tasks.map((elem,index) =>{
               return (<tr>
                         <td>
-                          <h3 id="task" title="press on me to edit" defaultValue={elem.task} onClick={()=> this.startEdit()}>{elem.task}</h3>
-                          
+                          <h3 id={index} title="press on me to edit"  onClick={()=> this.startEdit(elem.task,index)} contentEditable="true">{elem.task}</h3>
                         </td>
                         <td>
                           {elem.date}
