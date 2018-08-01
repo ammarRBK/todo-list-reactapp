@@ -48,12 +48,20 @@ class Tasks extends Component {
     var oldTaskIndex= this.state.index;
     const newTask= $("#"+oldTaskIndex).text();
     console.log("THE NEW TASK IS","\n",newTask);
-    const array= this.state.tasks;
+    axios.post(ServerAPI.url + 'tasks/editTask',{oldTask: this.state.tasks[oldTaskIndex],
+    newTask: newTask
+  }).then( _response => {
+    console.log(_response);
+    if(typeof(_response) === Object){ 
+    const array= this.state.tasks
     array[oldTaskIndex].task= newTask;
     this.setState({ tasks: array });
     console.log("Tasks after Edition=========>","\n",this.state.tasks);
     $("#editButton").hide();
-    
+  }else {
+    console.log("cannot update the task");
+  }
+  })  
   }
 
   componentDidMount() {
