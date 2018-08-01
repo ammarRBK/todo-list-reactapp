@@ -57,7 +57,7 @@ router.post('/editTask',(req,res)=>{
                     "tasks.$.task": newTask
                 }        
             },function (err,updateUser){
-                err ? res.send("Cannot update Task "+err) : res.send(updateUser.tasks);
+                err ? res.send("Cannot update Task "+err) : res.send("User task updated");
             })
             
 });

@@ -46,14 +46,15 @@ class Tasks extends Component {
 
   saveEdition(){
     var oldTaskIndex= this.state.index;
+    const array= this.state.tasks
     const newTask= $("#"+oldTaskIndex).text();
     console.log("THE NEW TASK IS","\n",newTask);
-    axios.post(ServerAPI.url + 'tasks/editTask',{oldTask: this.state.tasks[oldTaskIndex],
+    axios.post(ServerAPI.url + 'tasks/editTask',{oldTask: array[oldTaskIndex].task,
     newTask: newTask
   }).then( _response => {
     console.log(_response);
-    if(typeof(_response) === Object){ 
-    const array= this.state.tasks
+
+    if(_response.data === "User task updated"){ 
     array[oldTaskIndex].task= newTask;
     this.setState({ tasks: array });
     console.log("Tasks after Edition=========>","\n",this.state.tasks);
