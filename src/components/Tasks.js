@@ -48,6 +48,11 @@ class Tasks extends Component {
     var oldTaskIndex= this.state.index;
     const newTask= $("#"+oldTaskIndex).text();
     console.log("THE NEW TASK IS","\n",newTask);
+    const array= this.state.tasks;
+    array[oldTaskIndex].task= newTask;
+    this.setState({ tasks: array });
+    console.log("Tasks after Edition=========>","\n",this.state.tasks);
+    $("#editButton").hide();
     
   }
 

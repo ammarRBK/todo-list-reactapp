@@ -50,20 +50,14 @@ router.post('/editTask',(req,res)=>{
             var oldTask= req.body.oldTask;
             var newTask= req.body.newTask;
             db.update({
-                "_id": "5b27edb89356d723550757b3"
+                _id: userQuery.user._id,"tasks.task": oldTask  
             },
             {
-                "$set": {
-                    tasks:{
-                        oldTask: newTask
-                    }
-                    
-                }
-            },function (err){
-                if(err){
-                    console.log("Cannot update Task ",err);
-                }
-                console.log("Task updated");
+            $set: {
+                    "tasks.$.task": newTask
+                }        
+            },function (err,updateUser){
+                err ? res.send("Cannot update Task "+err) : res.send("Task updated"+updateUser);
             })
             
 });
