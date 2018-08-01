@@ -1,5 +1,5 @@
 const ServerAPI= {
-    url: 'http://localhost:3000/api/'
+    url: 'https://my-daily-tasks.herokuapp.com/api/'
 }
 
 export default ServerAPI;
