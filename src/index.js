@@ -15,27 +15,6 @@ import Tasks from './components/Tasks';
 ReactDOM.render(
   <Router>
       <div>
-        <nav id="nav"class="navbar navbar-inverse navbar-fixed-top">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="/">My Daily Tasks</a>
-              {
-                (
-                    window.location.href !== "http://localhost:3000/Tasks" ?
-                    <Link id="loginlink" to='/Login'><a class="navbar-brand">LogIn.</a></Link> :
-                    <Link id="loginlink" 
-                     onClick={
-                      axios.get(ServerAPI.url + 'users/logout')
-                      .then(res =>{
-                        console.log(res);
-                      })
-                    } 
-                    to='/Login'><a class="navbar-brand">LogOut</a></Link>
-                )
-              }
-            </div>
-          </div>
-        </nav>
         <Route exact path='/' component={App} />
         <Route path='/Login' component={Login} />
         <Route path='/AddTask' component={AddTask} />

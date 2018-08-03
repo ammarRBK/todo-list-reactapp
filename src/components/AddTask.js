@@ -40,7 +40,22 @@ class AddTask extends Component {
 
   render() {
     return (
-      <div class="container">
+      <div >
+        <nav id="nav"class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/">My Daily Tasks</a>
+              <Link id="loginlink" 
+              onClick={()=>
+                axios.get(ServerAPI.url + 'users/logout')
+                .then(res =>{
+                  console.log(res);
+                })
+                } 
+              to='/Login'><a class="navbar-brand">Log Out</a></Link>
+            </div>
+          </div>
+        </nav>
         <h2>Be aware with your tasks because you are using our APP</h2>
         <form onSubmit={this.handleSubmit}>
           <div class="form-group">

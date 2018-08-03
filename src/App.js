@@ -47,9 +47,17 @@ class App extends Component {
 
   render() {
     return (
-      <center>
-        <div class="container">
+        <div >
+          <nav id="nav"class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="/">My Daily Tasks</a>
+                <Link id="loginlink" to='/Login'><a class="navbar-brand">Log In</a></Link>
+              </div>
+            </div>
+          </nav>
           <br/>
+          <center>
           <h1>Sign Up</h1>
           <p>Please fill out all information</p>
           <hr/>
@@ -64,9 +72,8 @@ class App extends Component {
             <input className="form-control" type='password'  name="confermedPassword" value={this.state.confermedPassword} placeholder="Repeat Password" onChange={this.handleChange} required/><br/>
             <input type='submit' class="btn btn-success" value="Submit Sign Up"/>
           </form>
-          <h1>{this.state.username}</h1>
+          </center>
         </div>
-      </center>
     );
   }
 }

@@ -51,8 +51,16 @@ class Login extends Component {
   }
   render() {
     return (
-      <div class="container">
-        <center><h1> Sign In</h1></center>
+      <div >
+        <nav id="nav"class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/">My Daily Tasks</a>
+              <Link id="loginlink" to='/Login'><a class="navbar-brand">Log In</a></Link>
+            </div>
+          </div>
+        </nav>
+        <center><h1> Sign In</h1>
         <hr/>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -69,6 +77,7 @@ class Login extends Component {
           </div><br/>
           <button type="submit" className="btn btn-default">Submit Login</button>
         </form>
+        </center>
       </div>
     );
   }

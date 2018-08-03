@@ -21,8 +21,10 @@ class Tasks extends Component {
     const array= this.state.tasks
     array.splice(index,1);
     this.setState({tasks: array});
-
-    this.state.deleteMessage= "the task"+ _task.task + "is deleted";
+    this.state.deleteMessage= "the task [ "+ _task.task + " ] is deleted";
+    setTimeout(()=>{
+      this.setState( { deleteMessage: "" } );
+    },3000);
   }
 
   deleteTask(task,index){
@@ -66,6 +68,7 @@ class Tasks extends Component {
   }
 
   componentDidMount() {
+    console.log("CHECK IS LOGGED IN ", ServerAPI.checkIsLoggedIn());
     $("#editButton").hide();
     axios.get( ServerAPI.url + 'tasks/getusertasks' )
       .then(res => {
@@ -76,7 +79,22 @@ class Tasks extends Component {
 
   render() {
     return (
-      <div class="container">
+      <div >
+        <nav id="nav"class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/">My Daily Tasks</a>
+              <Link id="loginlink" 
+              onClick={()=>
+                axios.get(ServerAPI.url + 'users/logout')
+                .then(res =>{
+                  console.log(res);
+                })
+                } 
+              to='/Login'><a class="navbar-brand">Log Out</a></Link>
+            </div>
+          </div>
+        </nav>
         <table className="table table-striped">
           <thead>
             <tr>
