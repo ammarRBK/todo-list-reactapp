@@ -1,7 +1,7 @@
 import axios from 'axios';
 const ServerAPI= {
     response: "",
-    url: 'http://localhost:3000/api/',
+    url: 'https://my-daily-tasks.herokuapp.com/api/',
     checkIsLoggedIn: function(){
         // fetch(ServerAPI.url + 'users/checklogin')
         //     .then(function(response){
