@@ -26,4 +26,11 @@ ul {
 #loginlink{
   position: fixed;
   color: blue;
+  margin-left: 700px;
+}
+
+#toaddtasks{
+  margin-left: 50px;
+  color: green;
+  font-size: 30px;
 }

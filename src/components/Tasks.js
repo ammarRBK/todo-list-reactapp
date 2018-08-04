@@ -130,7 +130,7 @@ class Tasks extends Component {
           </tbody>
         </table>
         <h2>{this.state.deleteMessage}</h2>
-        <Link id="toAddTasks" to='/AddTask'><a class="" data-toggle="tooltip" data-placement="bottom" title="go to add tasks page">Add Task</a></Link>
+        <Link id="toaddtasks" to='/AddTask'><a id="toaddtasks" data-toggle="tooltip" data-placement="bottom" title="go to add tasks page">Add Task</a></Link>
       </div>
     );
   }
