@@ -86,6 +86,17 @@ router.post('/signin',(req,res)=>{
     })
 });
 
+//Log out the user from the app
+router.get('/logout',(req,res,next)=>{
+    query.user= null;
+    res.send("user loggedOut");
+})
+
+// Check the user if he is logged in.
+router.get('/checklogin',(req,res)=>{
+    query.user ? res.send("loggedin") : res.send("loggedout") 
+});
+
 
 
 module.exports= {router,query};
