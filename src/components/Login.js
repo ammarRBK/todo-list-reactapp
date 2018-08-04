@@ -48,6 +48,14 @@ class Login extends Component {
         console.error(err);
       })
       : alert("please fillout your information");
+  };
+
+  componentDidMount(){
+    axios.get(ServerAPI.url + 'users/checklogin')
+      .then(res =>{
+          console.log(res.data);
+          res.data === "loggedin" ? this.props.history.push('/Tasks') : console.log("User Loggedout");
+      })
   }
   render() {
     return (

@@ -24,5 +24,6 @@ ul {
 }
 
 #loginlink{
-  position: absolute;
+  position: fixed;
+  color: blue;
 }

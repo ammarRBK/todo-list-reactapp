@@ -35,7 +35,12 @@ class AddTask extends Component {
   }
 
   componentDidMount() {
-    
+    axios.get(ServerAPI.url + 'users/checklogin')
+      .then(res =>{
+          console.log(res.data);
+          res.data === "loggedout" ? this.props.history.push('/Login') :
+          console.log("User Logged in");
+      }) 
   }
 
   render() {
@@ -45,14 +50,11 @@ class AddTask extends Component {
           <div class="container-fluid">
             <div class="navbar-header">
               <a class="navbar-brand" href="/">My Daily Tasks</a>
-              <Link id="loginlink" 
-              onClick={()=>
-                axios.get(ServerAPI.url + 'users/logout')
-                .then(res =>{
-                  console.log(res);
-                })
-                } 
-              to='/Login'><a class="navbar-brand">Log Out</a></Link>
+              <a class="navbar-brand" id="loginlink" onClick={
+                  ()=>axios.get(ServerAPI.url + 'users/logout')
+                      .then(res =>{
+                        this.props.history.push('/Login')
+                      })}>Log Out</a>
             </div>
           </div>
         </nav>
