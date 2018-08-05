@@ -37,7 +37,22 @@ class Tasks extends Component {
 
   taskChecked(task,index,taskStatus){
     console.log(task,index,taskStatus);
-    this.state.isChecked === "still" ? this.setState({ isChecked: "done" }) : this.setState({ isChecked: "still" });
+    let array= this.state.tasks;
+    taskStatus === "still" ?
+
+    axios.post(ServerAPI.url + 'tasks/marktask',{ task: task, newStatus: "done" })
+    .then(res =>{
+      array[index].done= "done";
+      
+      res.data === "The task "+ task +" has sitted." ? this.setState({ tasks: array }) : alert(" Cannot set the task ");
+    }) :
+
+    axios.post(ServerAPI.url + 'tasks/marktask',{ task: task, newStatus: "still" })
+    .then(res =>{
+      array[index].done= "still";
+      
+      res.data === "The task "+ task +" has sitted." ? this.setState({ tasks: array }) : alert(" Cannot set the task ");
+    })
   }
 
   startEdit(task,_index){
