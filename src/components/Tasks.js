@@ -35,8 +35,8 @@ class Tasks extends Component {
     })
   }
 
-  taskChecked(){
-    console.log(this.state.isChecked);
+  taskChecked(task,index,taskStatus){
+    console.log(task,index,taskStatus);
     this.state.isChecked === "still" ? this.setState({ isChecked: "done" }) : this.setState({ isChecked: "still" });
   }
 
@@ -109,17 +109,17 @@ class Tasks extends Component {
             {this.state.tasks.map((elem,index) =>{
               return (<tr>
                         <td>
-                          <h3 id={index} title="press on me to edit"  onClick={()=> this.startEdit(elem.task,index)} contentEditable="true">{elem.task}</h3>
+                          <h5 id={index} title="press on me to edit"  onClick={()=> this.startEdit(elem.task,index)} contentEditable="true">{elem.task}</h5>
                         </td>
                         <td>
                           {elem.date}
                         </td>
                         <td>
-                          {this.state.isChecked}
+                          {elem.done}
                         </td>
                         <td>
-                          <input type="checkbox" onChange={this.taskChecked}/>
-                          <p>Mark as Done</p>
+                          <label>Mark as done</label>
+                          <input type="checkbox" onChange={()=>this.taskChecked(elem.task,index,elem.done)}/>
                         </td>
                         <td>
                           <button className="btn btn-danger" onClick={(_e) => this.deleteTask(elem,index)}> Delete </button>

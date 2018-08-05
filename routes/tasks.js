@@ -47,19 +47,31 @@ router.post('/addTask',(req,res,next)=>{
 });
 
 router.post('/editTask',(req,res)=>{
-            var oldTask= req.body.oldTask;
-            var newTask= req.body.newTask;
-            db.update({
-                _id: userQuery.user._id,"tasks.task": oldTask  
-            },
-            {
-            $set: {
-                    "tasks.$.task": newTask
-                }        
-            },function (err,updateUser){
-                err ? res.send("Cannot update Task "+err) : res.send("User task updated");
-            })
-            
+    var oldTask= req.body.oldTask;
+    var newTask= req.body.newTask;
+    db.update({
+        _id: userQuery.user._id,"tasks.task": oldTask  
+    },
+    {
+    $set: {
+            "tasks.$.task": newTask
+        }        
+    },function (err,updateUser){
+        err ? res.send("Cannot update Task "+err) : res.send("User task updated");
+    })       
+});
+
+router.post('/marktask', (req,res,next)=>{
+    db.update({
+        _id: userQuery.user._id, "tasks.task": req.body.task
+    },
+    {
+        $set: {
+            "tasks.$.done": req.body.newStatus
+        }
+    },(err)=>{
+        err ? res.status(500).send("Cannot set the new status for the task") : res.status(200).send("The task "+req.body.task+" has sitted.");
+    })
 });
 
 router.post('/deleteTask',(req,res)=>{
