@@ -60,6 +60,7 @@ router.post('/signin',(req,res)=>{
             return res.send('unable to find user');
         }
         else {
+//compare the password and send user authenticated if equal.
             bcrypt.compare(password,user.password)
             .then(samePassword =>{
                 if(samePassword){
@@ -98,5 +99,5 @@ router.get('/checklogin',(req,res)=>{
 });
 
 
-
+//share the router to server js file and the query to tasks router file,
 module.exports= {router,query};
