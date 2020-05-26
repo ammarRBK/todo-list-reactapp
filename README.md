@@ -19,4 +19,4 @@
   2- after successfull sign up task the app will direct you to Login page.<br>
   3- Login and start managing you tasks.<br>
   4- if you want to edit tasks you added just press on the task delete the old text and
-     the new task then press on <b>Save Edit</b> button.
+     write the new task text then press on <b>Save Edit</b> button.
